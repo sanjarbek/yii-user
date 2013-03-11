@@ -14,44 +14,34 @@ $this->menu=array(
 );
 ?>
 
-<h1><?php echo UserModule::t("Change password"); ?></h1>
+<h4><?php echo UserModule::t("Change password"); ?></h4>
 
-<div class="form">
-<?php $form=$this->beginWidget('CActiveForm', array(
+<div class="well-small">	
+<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 	'id'=>'changepassword-form',
 	'enableAjaxValidation'=>true,
+    'type'=>'horizontal',
 	'clientOptions'=>array(
 		'validateOnSubmit'=>true,
 	),
 )); ?>
 
-	<p class="note"><?php echo UserModule::t('Fields with <span class="required">*</span> are required.'); ?></p>
 	<?php echo $form->errorSummary($model); ?>
 	
-	<div class="row">
-	<?php echo $form->labelEx($model,'oldPassword'); ?>
-	<?php echo $form->passwordField($model,'oldPassword'); ?>
-	<?php echo $form->error($model,'oldPassword'); ?>
-	</div>
+    
+	<?php echo $form->passwordFieldRow($model,'oldPassword'); ?>
+	<?php echo $form->passwordFieldRow($model,'password', array(
+        'hint'=>UserModule::t("Minimal password length 4 symbols."),
+    ));
+    ?>
+	<?php echo $form->passwordFieldRow($model,'verifyPassword'); ?>	
 	
-	<div class="row">
-	<?php echo $form->labelEx($model,'password'); ?>
-	<?php echo $form->passwordField($model,'password'); ?>
-	<?php echo $form->error($model,'password'); ?>
-	<p class="hint">
-	<?php echo UserModule::t("Minimal password length 4 symbols."); ?>
-	</p>
-	</div>
-	
-	<div class="row">
-	<?php echo $form->labelEx($model,'verifyPassword'); ?>
-	<?php echo $form->passwordField($model,'verifyPassword'); ?>
-	<?php echo $form->error($model,'verifyPassword'); ?>
-	</div>
-	
-	
-	<div class="row submit">
-	<?php echo CHtml::submitButton(UserModule::t("Save")); ?>
+	<div class="form-actions">
+        <?php $this->widget('bootstrap.widgets.TbButton', array(
+			'buttonType'=>'submit',
+			'type'=>'primary',
+			'label'=>UserModule::t("Save"),
+		)); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

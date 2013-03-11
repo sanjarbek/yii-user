@@ -8,7 +8,8 @@ $this->menu=array(
     array('label'=>UserModule::t('List User'), 'url'=>array('index')),
 );
 ?>
-<h1><?php echo UserModule::t('View User').' "'.$model->username.'"'; ?></h1>
+<h4><?php echo UserModule::t('View User').' "'.$model->username.'"'; ?></h4>
+
 <?php 
 
 // For all users
@@ -35,7 +36,7 @@ $this->menu=array(
 		)
 	);
 			
-	$this->widget('zii.widgets.CDetailView', array(
+	$this->widget('bootstrap.widgets.TbDetailView', array(
 		'data'=>$model,
 		'attributes'=>$attributes,
 	));

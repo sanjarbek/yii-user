@@ -5,8 +5,6 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1><?php echo UserModule::t("Login"); ?></h1>
-
 <?php if(Yii::app()->user->hasFlash('loginMessage')): ?>
 
 <div class="success">
@@ -15,65 +13,60 @@ $this->breadcrumbs=array(
 
 <?php endif; ?>
 
-<p><?php echo UserModule::t("Please fill out the following form with your login credentials:"); ?></p>
-
-<div class="form">
-<?php echo CHtml::beginForm(); ?>
-
-	<p class="note"><?php echo UserModule::t('Fields with <span class="required">*</span> are required.'); ?></p>
-	
-	<?php echo CHtml::errorSummary($model); ?>
-	
-	<div class="row">
-		<?php echo CHtml::activeLabelEx($model,'username'); ?>
-		<?php echo CHtml::activeTextField($model,'username') ?>
-	</div>
-	
-	<div class="row">
-		<?php echo CHtml::activeLabelEx($model,'password'); ?>
-		<?php echo CHtml::activePasswordField($model,'password') ?>
-	</div>
-	
-	<div class="row">
-		<p class="hint">
-		<?php echo CHtml::link(UserModule::t("Register"),Yii::app()->getModule('user')->registrationUrl); ?> | <?php echo CHtml::link(UserModule::t("Lost Password?"),Yii::app()->getModule('user')->recoveryUrl); ?>
-		</p>
-	</div>
-	
-	<div class="row rememberMe">
-		<?php echo CHtml::activeCheckBox($model,'rememberMe'); ?>
-		<?php echo CHtml::activeLabelEx($model,'rememberMe'); ?>
-	</div>
-
-	<div class="row submit">
-		<?php echo CHtml::submitButton(UserModule::t("Login")); ?>
-	</div>
-	
-<?php echo CHtml::endForm(); ?>
-</div><!-- form -->
-
-
-<?php
-$form = new CForm(array(
-    'elements'=>array(
-        'username'=>array(
-            'type'=>'text',
-            'maxlength'=>32,
-        ),
-        'password'=>array(
-            'type'=>'password',
-            'maxlength'=>32,
-        ),
-        'rememberMe'=>array(
-            'type'=>'checkbox',
+<div class="row-fluid">
+    <div class="span6">
+    <?php
+    $this->beginWidget('bootstrap.widgets.TbBox', array(
+//        'title'=>'Logo',
+//        'headerIcon'=>'icon-th-list',
+        'htmlOptions'=>array(
+//            'class'=>'span6',
         )
-    ),
-
-    'buttons'=>array(
-        'login'=>array(
-            'type'=>'submit',
-            'label'=>'Login',
+    ));
+    ?>
+        <img src="images/logo.png" alt="Semamed" width="span6" />
+    
+    <?php
+    $this->endWidget();
+    ?>  
+    </div>
+        
+    <div class="span6">
+    <?php 
+    $this->beginWidget('bootstrap.widgets.TbBox', array(
+        'title'=>'Вход',
+        'headerIcon'=>'icon-user',
+        'htmlOptions'=>array(
+//            'class'=>'span6'
+        )
+    ));
+    $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+        'id'=>'login-form',
+        'enableClientValidation'=>true,
+        'clientOptions'=>array(
+            'validateOnSubmit'=>true,
         ),
-    ),
-), $model);
-?>
+        'htmlOptions'=>array(
+//            'class'=>'span6',
+        ),
+    )); ?>
+
+            <?php echo $form->textFieldRow($model,'username', array(
+            )); ?>
+            <?php echo $form->passwordFieldRow($model,'password', array(
+                'hint'=>CHtml::link(UserModule::t("Register"),Yii::app()->getModule('user')->registrationUrl) . ' | ' . CHtml::link(UserModule::t("Lost Password?"),Yii::app()->getModule('user')->recoveryUrl)
+            )); ?>
+        
+            <?php echo $form->checkBoxRow($model,'rememberMe'); ?>
+            <hr />
+            <?php $this->widget('bootstrap.widgets.TbButton', array(
+                'buttonType'=>'submit',
+                'type'=>'primary',
+                'label'=>'Вход',
+            )) ?>
+
+
+    <?php $this->endWidget(); 
+    $this->endWidget();?>
+    </div>
+</div>

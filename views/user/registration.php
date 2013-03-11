@@ -13,7 +13,7 @@ $this->breadcrumbs=array(
 <?php else: ?>
 
 <div class="form">
-<?php $form=$this->beginWidget('UActiveForm', array(
+<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 	'id'=>'registration-form',
 	'enableAjaxValidation'=>true,
 	'disableAjaxValidationAttributes'=>array('RegistrationForm_verifyCode'),
@@ -26,34 +26,13 @@ $this->breadcrumbs=array(
 	<p class="note"><?php echo UserModule::t('Fields with <span class="required">*</span> are required.'); ?></p>
 	
 	<?php echo $form->errorSummary(array($model,$profile)); ?>
-	
-	<div class="row">
-	<?php echo $form->labelEx($model,'username'); ?>
-	<?php echo $form->textField($model,'username'); ?>
-	<?php echo $form->error($model,'username'); ?>
-	</div>
-	
-	<div class="row">
-	<?php echo $form->labelEx($model,'password'); ?>
-	<?php echo $form->passwordField($model,'password'); ?>
-	<?php echo $form->error($model,'password'); ?>
-	<p class="hint">
-	<?php echo UserModule::t("Minimal password length 4 symbols."); ?>
-	</p>
-	</div>
-	
-	<div class="row">
-	<?php echo $form->labelEx($model,'verifyPassword'); ?>
-	<?php echo $form->passwordField($model,'verifyPassword'); ?>
-	<?php echo $form->error($model,'verifyPassword'); ?>
-	</div>
-	
-	<div class="row">
-	<?php echo $form->labelEx($model,'email'); ?>
-	<?php echo $form->textField($model,'email'); ?>
-	<?php echo $form->error($model,'email'); ?>
-	</div>
-	
+	<?php echo $form->textFieldRow($model,'username'); ?>
+	<?php echo $form->passwordFieldRow($model,'password', array(
+        'hint'=>UserModule::t("Minimal password length 4 symbols.")
+    ));
+    ?>
+	<?php echo $form->passwordFieldRow($model,'verifyPassword'); ?>	
+	<?php echo $form->textFieldRow($model,'email'); ?>
 <?php 
 		$profileFields=Profile::getFields();
 		if ($profileFields) {
