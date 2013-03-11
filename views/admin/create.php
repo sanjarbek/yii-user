@@ -10,7 +10,7 @@ $this->menu=array(
     array('label'=>UserModule::t('List User'), 'url'=>array('/user')),
 );
 ?>
-<h1><?php echo UserModule::t("Create User"); ?></h1>
+<h4><?php echo UserModule::t("Create User"); ?></h4>
 
 <?php
 	echo $this->renderPartial('_form', array('model'=>$model,'profile'=>$profile));
